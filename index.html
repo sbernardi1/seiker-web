@@ -895,6 +895,111 @@
       .buscador-cerrar { padding: 11px 14px; }
     }
 
+    /* ══════════════════════════════════════════════════
+       PRINCIPIO DE MEDICIÓN — visualización interactiva
+       ══════════════════════════════════════════════════ */
+    #principio {
+      background: linear-gradient(180deg, #0B2545 0%, #081b33 100%);
+      padding: 96px 6%; position: relative; overflow: hidden;
+    }
+    #principio::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 42%, rgba(26,123,192,.16), transparent 70%);
+      pointer-events: none;
+    }
+    .prin-wrap { position: relative; max-width: 1240px; margin: 0 auto; }
+    .prin-head { max-width: 680px; margin-bottom: 44px; }
+    #principio .s-tag-blue { color: #7BBFEA; }
+    #principio h2 {
+      font-family: var(--font-titulo);
+      font-size: clamp(1.7rem, 2.9vw, 2.6rem); font-weight: 800;
+      color: var(--white); line-height: 1.25; margin: 6px 0 14px;
+    }
+    #principio .prin-head p { color: rgba(255,255,255,.62); font-size: .95rem; line-height: 1.8; }
+
+    .prin-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 34px; align-items: start; }
+
+    .prin-canvas-box {
+      position: relative; background: rgba(255,255,255,.028);
+      border: 1px solid rgba(123,191,234,.17);
+      border-radius: 3px; overflow: hidden;
+    }
+    .prin-canvas-box canvas { display: block; width: 100%; height: auto; }
+    .prin-formula {
+      position: absolute; left: 18px; bottom: 14px;
+      font-family: Georgia, 'Times New Roman', serif; font-style: italic;
+      font-size: .95rem; color: rgba(255,255,255,.4); letter-spacing: .5px;
+    }
+    .prin-formula b { color: #7BBFEA; font-style: normal; font-weight: 700; }
+
+    /* Panel de lecturas */
+    .prin-panel {
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(123,191,234,.17);
+      border-radius: 3px; padding: 24px 24px 26px;
+    }
+    .prin-lectura { padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+    .prin-lectura:last-of-type { border-bottom: none; }
+    .prin-lab {
+      font-size: .63rem; letter-spacing: 2.2px; text-transform: uppercase;
+      color: rgba(255,255,255,.42); font-weight: 700; display: block; margin-bottom: 5px;
+    }
+    .prin-val {
+      font-family: var(--font-titulo); font-weight: 800;
+      font-size: 1.85rem; color: var(--white); line-height: 1;
+      font-variant-numeric: tabular-nums; letter-spacing: -.5px;
+    }
+    .prin-val small { font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.45); margin-left: 5px; letter-spacing: 0; }
+    .prin-val.destacado { color: #7BBFEA; }
+
+    .prin-ctrl { margin-top: 20px; }
+    .prin-ctrl > label {
+      font-size: .63rem; letter-spacing: 2.2px; text-transform: uppercase;
+      color: rgba(255,255,255,.42); font-weight: 700; display: block; margin-bottom: 11px;
+    }
+    .prin-ctrl input[type=range] {
+      -webkit-appearance: none; appearance: none; width: 100%;
+      height: 3px; background: rgba(255,255,255,.14); outline: none; border-radius: 2px;
+    }
+    .prin-ctrl input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 19px; height: 19px; border-radius: 50%;
+      background: var(--amber); cursor: pointer; border: 3px solid #0B2545;
+      box-shadow: 0 0 0 1px var(--amber);
+    }
+    .prin-ctrl input[type=range]::-moz-range-thumb {
+      width: 19px; height: 19px; border-radius: 50%; border: 3px solid #0B2545;
+      background: var(--amber); cursor: pointer; box-shadow: 0 0 0 1px var(--amber);
+    }
+    .prin-dn { display: flex; gap: 7px; flex-wrap: wrap; }
+    .prin-dn button {
+      flex: 1 1 auto; cursor: pointer; padding: 10px 6px;
+      background: transparent; border: 1px solid rgba(255,255,255,.17);
+      color: rgba(255,255,255,.62); font-family: 'DM Sans', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: 1px;
+      transition: all .2s; border-radius: 2px;
+    }
+    .prin-dn button:hover { border-color: rgba(123,191,234,.6); color: var(--white); }
+    .prin-dn button.on { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+    /* Diagnóstico de velocidad: el dato de ingeniería que decide el calibre */
+    .prin-diag {
+      margin-top: 22px; padding: 13px 15px; border-left: 3px solid;
+      background: rgba(255,255,255,.04); font-size: .79rem; line-height: 1.6;
+    }
+    .prin-diag b { display: block; font-size: .67rem; letter-spacing: 1.6px;
+      text-transform: uppercase; margin-bottom: 4px; }
+    .prin-diag.ok    { border-color: #3FB984; } .prin-diag.ok b    { color: #5FD3A3; }
+    .prin-diag.alta  { border-color: var(--amber); } .prin-diag.alta b  { color: #E89B4A; }
+    .prin-diag.baja  { border-color: #7BBFEA; } .prin-diag.baja b  { color: #7BBFEA; }
+    .prin-diag span { color: rgba(255,255,255,.62); }
+
+    @media (max-width: 900px) {
+      #principio { padding: 64px 5%; }
+      .prin-grid { grid-template-columns: 1fr; gap: 22px; }
+      .prin-formula { position: static; display: block; padding: 0 0 12px 18px; }
+    }
+
     /* ── BUSCADOR ────────────────────────── */
     .buscador {
       position: fixed; inset: 0; z-index: 600;
@@ -1329,6 +1434,63 @@
   </div>
 </div>
 
+<!-- PRINCIPIO DE MEDICIÓN -->
+<section id="principio">
+  <div class="prin-wrap">
+    <div class="prin-head">
+      <span class="s-tag s-tag-blue">Cómo funciona</span>
+      <h2>Medición sin partes móviles</h2>
+      <p>El líquido conductivo atraviesa un campo magnético y genera una tensión proporcional
+         a su velocidad — ley de Faraday. Nada obstruye el caño, nada se desgasta.
+         Movés el caudal y mirás qué mide el equipo.</p>
+    </div>
+
+    <div class="prin-grid">
+      <div class="prin-canvas-box">
+        <canvas id="prin-canvas" width="900" height="420"
+                role="img"
+                aria-label="Diagrama animado: líquido atravesando el campo magnético de un caudalímetro electromagnético y la tensión que induce en los electrodos."></canvas>
+        <span class="prin-formula">E = <b>B</b> · <b>v</b> · <b>D</b></span>
+      </div>
+
+      <div class="prin-panel">
+        <div class="prin-lectura">
+          <span class="prin-lab">Caudal</span>
+          <span class="prin-val" id="r-caudal">120<small>m³/h</small></span>
+        </div>
+        <div class="prin-lectura">
+          <span class="prin-lab">Velocidad del fluido</span>
+          <span class="prin-val" id="r-vel">1,89<small>m/s</small></span>
+        </div>
+        <div class="prin-lectura">
+          <span class="prin-lab">Tensión inducida</span>
+          <span class="prin-val destacado" id="r-mv">2,83<small>mV</small></span>
+        </div>
+
+        <div class="prin-ctrl">
+          <label for="c-caudal">Caudal — <span id="c-caudal-txt">120 m³/h</span></label>
+          <input type="range" id="c-caudal" min="0" max="400" value="120" step="5" />
+        </div>
+
+        <div class="prin-ctrl">
+          <label>Diámetro nominal</label>
+          <div class="prin-dn" id="c-dn">
+            <button data-dn="80">DN 80</button>
+            <button data-dn="150" class="on">DN 150</button>
+            <button data-dn="200">DN 200</button>
+            <button data-dn="300">DN 300</button>
+          </div>
+        </div>
+
+        <div class="prin-diag ok" id="r-diag">
+          <b>Rango óptimo</b>
+          <span id="r-diag-txt">Velocidad dentro de 1–3 m/s. Calibre bien dimensionado.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CAUDALÍMETROS servicios -->
 <section id="cauda-servicios">
   <span class="s-tag-blue">Lo que ofrecemos</span>
@@ -1519,6 +1681,263 @@
   }
 
   /* ══════════════════════════════════════════
+     PRINCIPIO DE MEDICIÓN
+     Ley de Faraday aplicada: E = B · v · D
+     Las cifras son reales, no decorativas — con B = 10 mT (campo típico de
+     un caudalímetro industrial) la tensión da unos pocos milivoltios, que es
+     exactamente el orden que maneja el equipo.
+     ══════════════════════════════════════════ */
+  (function () {
+    const cv = document.getElementById('prin-canvas');
+    if (!cv) return;
+    const cx = cv.getContext('2d');
+    const W = 900, H = 420;
+
+    const B = 0.010;              // Tesla — campo magnético de las bobinas
+    let   DN = 150;               // mm — diámetro nominal
+    let   Q  = 120;               // m³/h — caudal
+    let   quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const area = () => Math.PI * Math.pow(DN / 2000, 2);   // m²
+    const vel  = () => Q / (area() * 3600);                // m/s
+    const mV   = () => B * vel() * (DN / 1000) * 1000;     // milivoltios
+
+    const num = (n, d) => n.toFixed(d).replace('.', ',');
+
+    /* ── Geometría del dibujo ── */
+    const ejeY = 206;
+    const planoX = 430;                       // plano de medición
+    const radio = () => 52 + (DN / 300) * 40; // el caño se ve más ancho con mayor DN
+    const ELIPSE_RX = 52;                     // perspectiva del corte: separa los electrodos
+
+    /* ── Partículas del fluido ──
+       Perfil parabólico: en el centro el líquido va más rápido que junto a la
+       pared, como ocurre de verdad en un caño. */
+    const PART = 320;
+    const parts = Array.from({ length: PART }, () => ({
+      x: Math.random() * W,
+      t: Math.random() * 2 - 1,               // posición transversal, -1 a 1
+      r: 1.1 + Math.random() * 1.9
+    }));
+
+    function perfil(t) { return 1 - t * t * 0.72; }
+
+    function dibujar() {
+      const R = radio(), pared = 13;
+      cx.clearRect(0, 0, W, H);
+
+      /* Caño exterior */
+      const g = cx.createLinearGradient(0, ejeY - R - pared, 0, ejeY + R + pared);
+      g.addColorStop(0, '#2b4a6b'); g.addColorStop(.5, '#17304d'); g.addColorStop(1, '#0f2238');
+      cx.fillStyle = g;
+      cx.fillRect(0, ejeY - R - pared, W, (R + pared) * 2);
+
+      /* Liner interno — el revestimiento que figura en la tabla de series */
+      cx.fillStyle = 'rgba(123,191,234,.16)';
+      cx.fillRect(0, ejeY - R - 4, W, 4);
+      cx.fillRect(0, ejeY + R, W, 4);
+
+      /* Interior del caño */
+      cx.fillStyle = '#071a2e';
+      cx.fillRect(0, ejeY - R, W, R * 2);
+
+      /* ── Campo magnético: líneas verticales entre bobinas ── */
+      const pulso = quieto ? .5 : (Math.sin(Date.now() / 620) * .5 + .5);
+      cx.lineWidth = 2;
+      for (let i = 0; i <= 8; i++) {
+        const x = planoX - 150 + i * 37.5;
+        const borde = Math.abs(i - 4) / 4;
+        const op = (.9 - borde * .45) * (.62 + pulso * .38);
+        cx.strokeStyle = `rgba(226,134,38,${op})`;
+        cx.beginPath();
+        cx.moveTo(x, ejeY - R - pared);
+        cx.lineTo(x, ejeY + R + pared);
+        cx.stroke();
+        /* Punta de flecha, para que se lea la dirección del campo */
+        [-.42, .18].forEach(f => {
+          const ay = ejeY + R * f;
+          cx.beginPath();
+          cx.moveTo(x, ay + 9);
+          cx.lineTo(x - 4.5, ay);
+          cx.lineTo(x + 4.5, ay);
+          cx.closePath();
+          cx.fillStyle = `rgba(226,134,38,${op})`;
+          cx.fill();
+        });
+      }
+
+      /* ── Partículas ── */
+      const v = vel();
+      const escala = Math.min(v, 6) * 0.62 + (v > 0 ? 0.18 : 0);
+      parts.forEach(p => {
+        if (!quieto) {
+          p.x += escala * perfil(p.t) * 2.6;
+          if (p.x > W + 10) { p.x = -10; p.t = Math.random() * 2 - 1; }
+        }
+        const y = ejeY + p.t * (R - 5);
+        const rapidez = perfil(p.t) * Math.min(v / 3.2, 1.3);
+        /* Estela: cuanto más rápido va, más se alarga */
+        const largo = 4 + rapidez * 30;
+        const lg = cx.createLinearGradient(p.x - largo, 0, p.x, 0);
+        lg.addColorStop(0, 'rgba(75,163,221,0)');
+        lg.addColorStop(1, `rgba(${130 + rapidez * 70},${200 + rapidez * 40},255,${.55 + rapidez * .45})`);
+        cx.strokeStyle = lg;
+        cx.lineWidth = p.r;
+        cx.beginPath(); cx.moveTo(p.x - largo, y); cx.lineTo(p.x, y); cx.stroke();
+      });
+
+      /* ── Bobinas: núcleo con devanado ── */
+      [-1, 1].forEach(lado => {
+        const yb = ejeY + lado * (R + pared);
+        const alto = 42, top = lado === -1 ? yb - alto : yb;
+        const gb = cx.createLinearGradient(0, top, 0, top + alto);
+        if (lado === -1) { gb.addColorStop(0, '#8a4600'); gb.addColorStop(1, '#e28626'); }
+        else             { gb.addColorStop(0, '#e28626'); gb.addColorStop(1, '#8a4600'); }
+        cx.fillStyle = gb;
+        cx.fillRect(planoX - 118, top, 236, alto);
+        /* Espiras del devanado */
+        cx.strokeStyle = 'rgba(12,30,52,.55)'; cx.lineWidth = 2.5;
+        for (let i = 0; i < 13; i++) {
+          const sx = planoX - 110 + i * 18;
+          cx.beginPath(); cx.moveTo(sx, top + 3); cx.lineTo(sx + 9, top + alto - 3); cx.stroke();
+        }
+        /* Brillo superior, para que lea como metal y no como rectángulo plano */
+        cx.fillStyle = 'rgba(255,255,255,.18)';
+        cx.fillRect(planoX - 118, lado === -1 ? top : top + alto - 3, 236, 3);
+      });
+      cx.font = '700 11px "DM Sans", sans-serif';
+      cx.fillStyle = 'rgba(232,155,74,.95)';
+      cx.textAlign = 'center';
+      cx.fillText('BOBINA — CAMPO MAGNÉTICO B', planoX, ejeY - R - pared - 56);
+
+      /* ── Plano de medición y electrodos ──
+         La elipse es el caño visto en perspectiva: los electrodos quedan
+         enfrentados, perpendiculares al campo y al flujo. */
+      /* Oscurecer apenas el plano de medición para que la elipse y los
+         electrodos se despeguen de las líneas de campo. */
+      const vig = cx.createRadialGradient(planoX, ejeY, 8, planoX, ejeY, ELIPSE_RX + 34);
+      vig.addColorStop(0, 'rgba(4,16,30,.72)');
+      vig.addColorStop(1, 'rgba(4,16,30,0)');
+      cx.fillStyle = vig;
+      cx.beginPath(); cx.ellipse(planoX, ejeY, ELIPSE_RX + 34, R, 0, 0, Math.PI * 2); cx.fill();
+
+      cx.strokeStyle = 'rgba(255,255,255,.62)';
+      cx.lineWidth = 1.8;
+      cx.setLineDash([6, 5]);
+      cx.beginPath(); cx.ellipse(planoX, ejeY, ELIPSE_RX, R, 0, 0, Math.PI * 2); cx.stroke();
+      cx.setLineDash([]);
+
+      /* Electrodos: enfrentados sobre el plano, perpendiculares al campo y al
+         flujo. No llevan vástago hacia arriba — salen hacia adelante y atrás,
+         fuera del plano del dibujo. */
+      const senal = Math.min(mV() / 6, 1);
+      [-1, 1].forEach(lado => {
+        const ex = planoX + lado * ELIPSE_RX;
+        if (senal > .02) {
+          const hal = cx.createRadialGradient(ex, ejeY, 2, ex, ejeY, 12 + senal * 22);
+          hal.addColorStop(0, `rgba(123,191,234,${senal * .55})`);
+          hal.addColorStop(1, 'rgba(123,191,234,0)');
+          cx.fillStyle = hal;
+          cx.beginPath(); cx.arc(ex, ejeY, 12 + senal * 22, 0, Math.PI * 2); cx.fill();
+        }
+        cx.beginPath(); cx.arc(ex, ejeY, 8.5, 0, Math.PI * 2);
+        cx.fillStyle = '#eef3f8'; cx.fill();
+        cx.strokeStyle = 'rgba(11,37,69,.7)'; cx.lineWidth = 2; cx.stroke();
+        /* Polaridad: la tensión aparece entre un electrodo y el otro */
+        cx.fillStyle = '#0B2545';
+        cx.font = '800 11px "DM Sans", sans-serif';
+        cx.textAlign = 'center'; cx.textBaseline = 'middle';
+        cx.fillText(lado === 1 ? '+' : '−', ex, ejeY + .5);
+        cx.textBaseline = 'alphabetic';
+      });
+
+      /* Cable hacia la lectura */
+      cx.strokeStyle = `rgba(123,191,234,${.3 + senal * .5})`;
+      cx.lineWidth = 2;
+      cx.beginPath();
+      cx.moveTo(planoX + ELIPSE_RX, ejeY);
+      cx.lineTo(planoX + ELIPSE_RX + 26, ejeY);
+      cx.lineTo(planoX + ELIPSE_RX + 26, ejeY + R + 40);
+      cx.lineTo(W - 118, ejeY + R + 40);
+      cx.lineTo(W - 118, ejeY + R + 72);
+      cx.stroke();
+      cx.font = '700 12px "DM Sans", sans-serif';
+      cx.fillStyle = `rgba(123,191,234,${.55 + senal * .45})`;
+      cx.textAlign = 'right';
+      cx.fillText(num(mV(), 2) + ' mV', W - 126, ejeY + R + 68);
+
+      cx.textAlign = 'center';
+      cx.font = '700 11px "DM Sans", sans-serif';
+      cx.fillStyle = 'rgba(255,255,255,.62)';
+      cx.fillText('ELECTRODOS', planoX, ejeY + R + pared + 62);
+
+      /* Sentido del flujo */
+      cx.textAlign = 'left';
+      cx.fillStyle = 'rgba(123,191,234,.72)';
+      cx.fillText('FLUJO  →', 22, ejeY - R - pared - 22);
+
+      /* Liner: es el material que figura en la tabla de series, vale nombrarlo */
+      cx.textAlign = 'right';
+      cx.font = '600 10px "DM Sans", sans-serif';
+      cx.fillStyle = 'rgba(123,191,234,.5)';
+      cx.fillText('LINER PU / TEFLON', W - 22, ejeY - R - pared - 22);
+    }
+
+    /* ── Lecturas del panel ── */
+    const $ = id => document.getElementById(id);
+    function actualizar() {
+      const v = vel();
+      $('r-caudal').innerHTML = num(Q, 0) + '<small>m³/h</small>';
+      $('r-vel').innerHTML    = num(v, 2) + '<small>m/s</small>';
+      $('r-mv').innerHTML     = num(mV(), 2) + '<small>mV</small>';
+      $('c-caudal-txt').textContent = num(Q, 0) + ' m³/h';
+
+      /* Diagnóstico de calibre: el dato que realmente sirve para elegir equipo. */
+      const d = $('r-diag'), t = $('r-diag-txt');
+      d.className = 'prin-diag ';
+      if (Q === 0) {
+        d.className += 'baja'; d.querySelector('b').textContent = 'Sin caudal';
+        t.textContent = 'Sin flujo no hay tensión inducida: el equipo lee cero real, sin deriva.';
+      } else if (v < 1) {
+        d.className += 'baja'; d.querySelector('b').textContent = 'Velocidad baja';
+        t.textContent = 'Por debajo de 1 m/s la señal es débil. Convendría un diámetro menor para este caudal.';
+      } else if (v <= 3) {
+        d.className += 'ok'; d.querySelector('b').textContent = 'Rango óptimo';
+        t.textContent = 'Velocidad dentro de 1–3 m/s. Calibre bien dimensionado.';
+      } else if (v <= 5) {
+        d.className += 'alta'; d.querySelector('b').textContent = 'Velocidad alta';
+        t.textContent = 'Mide correctamente, pero por encima de 3 m/s el liner se desgasta antes. Evaluar un diámetro mayor.';
+      } else {
+        d.className += 'alta'; d.querySelector('b').textContent = 'Fuera de rango';
+        t.textContent = 'Más de 5 m/s acelera la erosión del liner y los electrodos. Recomendado subir de diámetro.';
+      }
+    }
+
+    /* ── Controles ── */
+    $('c-caudal').addEventListener('input', e => { Q = +e.target.value; actualizar(); if (quieto) dibujar(); });
+    $('c-dn').addEventListener('click', e => {
+      const b = e.target.closest('button[data-dn]');
+      if (!b) return;
+      DN = +b.dataset.dn;
+      [...e.currentTarget.children].forEach(x => x.classList.toggle('on', x === b));
+      actualizar(); if (quieto) dibujar();
+    });
+
+    /* ── Bucle: solo mientras la sección está a la vista ── */
+    let corriendo = false, raf = 0;
+    function loop() { dibujar(); raf = requestAnimationFrame(loop); }
+    new IntersectionObserver(es => {
+      es.forEach(en => {
+        if (en.isIntersecting && !corriendo && !quieto) { corriendo = true; loop(); }
+        else if (!en.isIntersecting && corriendo) { corriendo = false; cancelAnimationFrame(raf); }
+      });
+    }, { rootMargin: '120px' }).observe(cv);
+
+    actualizar();
+    dibujar();
+  })();
+
+  /* ══════════════════════════════════════════
      BUSCADOR — índice armado desde el contenido real
      ══════════════════════════════════════════ */
   let idxBusq = [], resBusq = [], selBusq = -1;
@@ -1542,6 +1961,7 @@
       ['#servicios',     'Nuestras soluciones'],
       ['#fertilizantes', 'Fertilizantes líquidos'],
       ['#caudalimetros', 'Caudalímetros'],
+      ['#principio',     'Principio de medición'],
       ['#cauda-servicios','Venta · Instalación · Reparación'],
       ['#cauda-usos',    'Usos industriales y agropecuarios'],
       ['#nosotros',      'Quiénes somos'],
